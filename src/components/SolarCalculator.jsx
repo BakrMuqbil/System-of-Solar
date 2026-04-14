@@ -138,7 +138,8 @@ brand={hasResults ? results.inverterName : null}
         <ResultItem 
           icon={<Battery />} 
           label="سعة تخزين LiFePO4" 
-          value={hasResults ? results.batteries : "--"} 
+          value={hasResults ? results.batteryKwh : "--"} 
+         brand={hasResults ? results.batteryName : null}
           unit="kWh" 
           colorClass="text-emerald-400" 
           bgClass="bg-emerald-500/10" 
