@@ -44,7 +44,7 @@ if (!numericPanelPower || numericPanelPower === 0) {
     // 4. إرسال النتائج مع معلومات العميل واللوح المختار للعرض النهائي
     onCalculate(finalResults);  
 
-    console.log("Calculation finalResults:", finalResults);
+    //console.log("Calculation finalResults:", finalResults);
   };
 
   return (
