@@ -96,8 +96,8 @@ const totalHours= dH+nH;
     `   ➥ النوع: ${results.panelName}\n\n` +
     `◈ *الإنفرتر:* ${results.inverterProductValue} KW\n` +
     `   ➥ الموديل: ${results.inverterName}\n\n` +
-    `◈ *البطارية:* ${results.batteryName} kWh\n` +
-    `   ➥ النوع: LiFePO4 (ليثيوم)\n\n` +
+    `◈ *البطارية:* ${results.batteryKwh} kWh\n` +
+    `   ➥ النوع: ${results.batteryName} LiFePO4 (ليثيوم)\n\n` +
     `━━━━━━━━━━━━━━━━\n` +
     `🔗 *رابط مراجعة النتائج:* [رابط الملحق]\n\n` +
     `*تم التحليل بواسطة تطبيق Land Solar*`;
