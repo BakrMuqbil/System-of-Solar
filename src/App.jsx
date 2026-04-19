@@ -32,8 +32,8 @@ function App() {
 
           {/* إصدار الحاسبة - تم الحفاظ على التصميم المتناسق */}
           <div className="flex flex-col items-end">
-            <div className="text-[10px] font-bold text-[#00a896] bg-emerald-50 px-1 py-1 rounded-full border border-emerald-100 uppercase tracking-widest ">
-              نظام تحجيم المنظومات v2.0
+            <div className="text-[10px] font-bold text-center text-[#00a896] bg-emerald-50 px-1 py-1 rounded-full border border-emerald-100 uppercase tracking-widest ">
+              نظام تحجيم المنظومات v2.1
             </div>
            <p className="text-slate-500 text-[10px] text-center mt-2 leading-relaxed">
   تم التطوير بواسطة المهندس {' '}
@@ -110,11 +110,19 @@ function App() {
           </svg>
           <span className="text-base font-bold ">العنوان:</span>
         </div>
-        <div className="text-[12px] leading-tight font-bold mr-3">
-          <p>عدن - المنصورة - خلف سوق</p>
-          <p>الخضار - مقابل فندق ماس</p>
-          <p>عدن</p>
+
+<div className="text-[12px] leading-tight font-bold mr-3">
+<a href="https://www.google.com/maps/search/?api=1&query=لاند+سولار"
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="text-[12px] leading-tight font-bold mr-3 hover:text-green-700 transition-colors cursor-pointer block" > 
+  <p>عدن - المنصورة - خلف سوق</p>
+  <p>الخضار - مقابل فندق ماس</p>
+  <p>عدن</p>
+</a>
+
         </div>
+
       </div>
 
     </div>
