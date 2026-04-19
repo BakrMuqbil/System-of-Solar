@@ -19,7 +19,7 @@ export const solarData = {
     { id: 6, brand: "Sako", capacity: "2KW", systemVoltage: "24V", maxSolarPower: 2000, price: 210, name: "Sako-2KW/V24/mx1.6k" },
     { id: 7, brand: "Sako", capacity: "6.2KW", systemVoltage: "48V", maxSolarPower: 6500, price: 350, name: "Sako-6.2KW/V48/mx6.5k" },
     { id: 8, brand: "Sako", capacity: "11KW", systemVoltage: "48V/96V", maxSolarPower: 11000, price: 800, name: "Sako-11KW-V48/96-mx11k" },
-    { id: 9, brand: "Sako", capacity: "4.2KW", systemVoltage: "24V", maxSolarPower: 5000, price: 275, name: "Sako-4.2KW-V24-mx5k" },
+    //{ id: 9, brand: "Sako", capacity: "4.2KW", systemVoltage: "24V", maxSolarPower: 5000, price: 275, name: "Sako-4.2KW-V24-mx5k" },
 
     { id: 10, brand: "Lego", capacity: "2KW", systemVoltage: "24V", maxSolarPower: 2000, price: 200, name: "Lego-2KW-V24-mx2.4k" },
    //  { id: 11, brand: "Lego", capacity: "4.2KW", systemVoltage: "24V", maxSolarPower: 5000, price: 255, name: "Lego-4.2KW-V24-mx5k" },
