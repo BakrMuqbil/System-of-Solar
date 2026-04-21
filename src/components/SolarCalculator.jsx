@@ -1,8 +1,6 @@
 import React from 'react';
 import { SolarPanel, Battery, Zap, LayoutDashboard, Share2 } from 'lucide-react';
 import styles from './calculator.module.css';
-
-
 // مكون فرعي داخلي للنتائج
 function ResultItem({ icon, label, value, unit, colorClass, bgClass, brand= null }) {
   return (
@@ -34,19 +32,82 @@ function ResultItem({ icon, label, value, unit, colorClass, bgClass, brand= null
     </div>
   );
 }
-
-
 function SolarCalculator({ results }) { 
   // 2. الحماية من الخطأ: التأكد من وجود results قبل القراءة
   const hasResults = results && results.panels > 0;
   // استخراج بيانات العميل من داخل results التي أرسلناها من الفورم
   const client = results?.customerInfo;
 
-  const handleWhatsApp = () => {
+      /* const handleWhatsApp = () => {
+    if (!hasResults) return;
+
+    const phoneNumber = "967783265111";
+    
+    const deviceLabels = {
+      lights: 'لمبات LED',
+      fans: 'مراوح',
+      tvs: 'شاشة',
+      washers: 'غسالة',
+      fridges: 'ثلاجة',
+      ac_1ton: 'مكيف طن (إنفرتر)',
+      ac_1_5ton: 'مكيف طن ونص (إنفرتر)'
+    };
+
+    const devicesList = Object.entries(results.selectedDevices || {}).map(([id, dev]) => {
+      const dC = Number(dev.dayCount) || 0;
+      const nC = Number(dev.nightCount) || 0;
+      const power = Number(dev.power) || 0;
+      const dH = Number(dev.dayHours) || 0;
+      const nH = Number(dev.nightHours) || 0;
+      
+      const deviceName = deviceLabels[id] || id; 
+      // حساب إجمالي استهلاك الجهاز الواحد بناءً على التقسيم الجديد
+      const totalWh = (dC * dH * power) + (nC * nH * power);
+
+      return `◈_ *${deviceName}*: القدرة ${power}W\n` +
+             `#_ *النهار* \n` +
+             `•_ العدد: ${dC} \n` +
+             `•_ عدد الساعات: ${dH}س \n` +
+             `#_ *المساء* \n` +
+             `•_ العدد: ${nC} \n` +
+             `•_ عدد الساعات: ${nH}س \n` +
+             `•_ إجمالي الاستهلاك: ${totalWh}Wh`;
+    }).join('\n\n_______________\n\n');
+    
+
+    const message = 
+      `️# *نتائج التحجيم لشركة Land Solar* \n` +
+      `________________________\n\n` +
+      `@ *بيانات العميل:*\n\n` +
+      `• الاسم: ${results.customerInfo?.name || 'غير محدد'}\n` +
+      `• الجوال: ${results.customerInfo?.phone || 'غير محدد'}\n` +
+      `• المنطقة: ${results.customerInfo?.address || 'غير محدد'}\n` +
+      `________________________\n\n` +
+      `📋 *تفاصيل الاستهلاك اليومي:*\n\n` +
+      `${devicesList}\n\n` +
+      `________________________\n\n` +
+      `📊 *ملخص الطاقة:* \n\n` +
+      `• أحمال الذروة: ${results.peakLoadKw || '0'} KW\n` + 
+      `• استهلاك النهار: ${results.dayEnergyWh || '0'} Wh\n` +
+      `• استهلاك المساء: ${results.nightEnergyWh || '0'} Wh\n` +
+      `• الإجمالي اليومي: ${results.actualLoadKwh || '0'} kWh\n\n` +
+      `🛠️ *المنظومة المقترحة:*\n` +
+      `◈ *الألواح:* ${results.panels || '0'} ألواح (${results.panelCapacity || ''})\n` +
+      `   ➥ النوع: ${results.panelName || ''}\n\n` +
+      `◈ *الإنفرتر:* ${results.inverterProductValue || '0'} KW\n` +
+      `   ➥ الموديل: ${results.inverterName || ''}\n\n` +
+      `◈ *البطارية:* ${results.batteryKwh || '0'} kWh\n` +
+      `   ➥ النوع: ${results.batteryName || ''} LiFePO4 (ليثيوم)\n\n` +
+      `━━━━━━━━━━━━━━━━\n` +
+      `🔗 *رابط مراجعة النتائج:* [رابط الملحق]\n\n` +
+      `*تم التحليل بواسطة تطبيق Land Solar*`;
+
+    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+  }; */
+const handleWhatsApp = () => {
   if (!hasResults) return;
 
   const phoneNumber = "967783265111";
- //const phoneNumber = "967774265902"; 
   const deviceLabels = {
     lights: 'لمبات LED',
     fans: 'مراوح',
@@ -57,36 +118,38 @@ function SolarCalculator({ results }) {
     ac_1_5ton: 'مكيف طن ونص (إنفرتر)'
   };
 
-  // تنسيق قائمة الأجهزة بشكل مبسط واحترافي
+  // تنسيق قائمة الأجهزة بالتفصيل الجديد
   const devicesList = Object.entries(results.selectedDevices || {}).map(([id, dev]) => {
-    const totalPower = dev.count * dev.power;
+    const dC = Number(dev.dayCount) || 0;
+    const nC = Number(dev.nightCount) || 0;
+    const dP = Number(dev.dayPower) || Number(dev.power) || 0;
+    const nP = Number(dev.nightPower) || Number(dev.power) || 0;
+    const dH = Number(dev.dayHours) || 0;
+    const nH = Number(dev.nightHours) || 0;
     
     const deviceName = deviceLabels[id] || id; 
-    const dH = dev.dayHours || 0;
-    const nH = dev.nightHours || 0;
-    const totalHoursPower= totalPower * (dH + nH);
-const totalHours= dH+nH;
-    return `◈_ ${deviceName}: العدد ${dev.count} ، القدرة ${totalPower}W\n` +
-           `• _ عدد الساعات: ${totalHours}س (${dH}ن / ${nH}س)\n` +
-           `• _ اجمالي الاستهلاك: ${totalHoursPower}Wh`;
-  }).join('\n\n');
-  
+    const deviceTotalWh = (dC * dP * dH) + (nC * nP * nH);
+
+    return `◈_ *${deviceName}*: القدرة ${dP === nP ? dP + 'W' : dP + '/' + nP + 'W'}\n` +
+           `#_ *النهار* \n` +
+           `•_ العدد: ${dC} | ساعات: ${dH}س\n` +
+           `#_ *المساء* \n` +
+           `•_ العدد: ${nC} | ساعات: ${nH}س\n` +
+           `•_ استهلاك الجهاز: ${deviceTotalWh}Wh`;
+  }).join('\n\n_______________\n\n');
 
   const message = 
     `️# *نتائج التحجيم لشركة Land Solar* \n` +
     `________________________\n\n` +
-    `@ *بيانات العميل:*\n` +
-     `\n\n` +
+    `@ *بيانات العميل:*\n\n` +
     `• الاسم: ${results.customerInfo?.name || 'غير محدد'}\n` +
     `• الجوال: ${results.customerInfo?.phone || 'غير محدد'}\n` +
-    `• المنطقة: ${results.customerInfo?.address || 'غير محدد'}\n`
-+`________________________\n\n`+
-    `📋 *تفاصيل الاستهلاك اليومي:*\n` +
-   `\n\n` +
+    `• المنطقة: ${results.customerInfo?.address || 'غير محدد'}\n` +
+    `________________________\n\n` +
+    `📋 *تفاصيل الاستهلاك اليومي:*\n\n` +
     `${devicesList}\n\n` +
-   `________________________\n\n` +
-    `📊 *ملخص الطاقة:* \n` +
-    `\n\n` +
+    `________________________\n\n` +
+    `📊 *ملخص الطاقة:* \n\n` +
     `• أحمال الذروة: ${results.peakLoadKw} KW\n` + 
     `• استهلاك النهار: ${results.dayEnergyWh} Wh\n` +
     `• استهلاك المساء: ${results.nightEnergyWh} Wh\n` +
@@ -104,9 +167,6 @@ const totalHours= dH+nH;
 
   window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 };
-
-
-
 
   return (
     <div className={styles.resultsCard}>
